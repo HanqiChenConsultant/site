@@ -635,7 +635,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   function openPost(id) {
     document.getElementById(id).classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -645,15 +645,24 @@
     document.body.style.overflow = '';
   }
   // Close on escape key
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      document.querySelectorAll('.blog-post-overlay.active').forEach(el => {
+      document.querySelectorAll('.blog-post-overlay.active').forEach(function(el) {
         el.classList.remove('active');
         document.body.style.overflow = '';
       });
     }
   });
   // Close on overlay background click
-  document.querySelectorAll('.blog-post-overlay').forEach(overlay => {
-    overlay.addEventListener('click', e => {
-      if (e.target ===
+  document.querySelectorAll('.blog-post-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
