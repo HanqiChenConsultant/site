@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanqi Chen — International Business & Entrepreneurship</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --fg: #1A1A18;
+    --accent: #B45309;
+    --accent-light: #F59E0B;
+    --muted: #78716C;
+    --card: #FFFFFF;
+    --border: #E7E5E4;
+    --highlight: #FFFBEB;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Libre Franklin', 'Helvetica Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(250,250,247,.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 1.25rem; color: var(--fg);
+    text-decoration: none; letter-spacing: -.02em;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: .875rem;
+    font-weight: 500; letter-spacing: .03em; text-transform: uppercase;
+    transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(180,83,9,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content {
+    max-width: 720px; text-align: center;
+    animation: fadeUp .9s ease both;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: .75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .15em; color: var(--accent);
+    background: var(--highlight);
+    padding: 6px 16px; border-radius: 40px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    line-height: 1.15; letter-spacing: -.03em; margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 1.15rem; color: var(--muted); max-width: 540px;
+    margin: 0 auto 36px; line-height: 1.75; font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; background: var(--fg); color: #fff;
+    text-decoration: none; font-size: .9rem; font-weight: 600;
+    border-radius: 8px; letter-spacing: .02em;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26,26,24,.18);
+  }
+  .hero-cta svg { width: 16px; height: 16px; }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 32px; }
+  .section-label {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .18em;
+    color: var(--accent); font-weight: 700; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.2; letter-spacing: -.02em; margin-bottom: 20px;
+  }
+  .section-desc {
+    color: var(--muted); font-size: 1.05rem; max-width: 600px;
+    line-height: 1.75; font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about-grid {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    align-items: center;
+  }
+  .about-image {
+    width: 100%; aspect-ratio: 4/5; border-radius: 16px;
+    background: linear-gradient(135deg, #E7E5E4 0%, #D6D3D1 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; color: var(--muted); text-align: center;
+    padding: 20px;
+    position: relative; overflow: hidden;
+  }
+  .about-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: 16px;
+  }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    margin-top: 36px;
+  }
+  .stat {
+    text-align: center; padding: 20px 12px;
+    background: var(--highlight); border-radius: 12px;
+  }
+  .stat-num {
+    font-family: var(--serif); font-size: 1.6rem; color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); margin-top: 6px; font-weight: 500;
+  }
+
+  /* ── BLOG ── */
+  #blog { max-width: 1080px; margin: 0 auto; }
+  .blog-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px; margin-top: 48px;
+  }
+  .blog-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+    cursor: pointer; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+  }
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26,26,24,.08);
+  }
+  .blog-thumb {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: #fff;
+    position: relative;
+  }
+  .blog-thumb.t1 { background: linear-gradient(135deg, #1E3A5F, #3B82F6); }
+  .blog-thumb.t2 { background: linear-gradient(135deg, #7C2D12, #F59E0B); }
+  .blog-thumb.t3 { background: linear-gradient(135deg, #065F46, #10B981); }
+  .blog-thumb-label {
+    position: absolute; bottom: 12px; left: 16px;
+    font-size: .65rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .12em; background: rgba(255,255,255,.2);
+    padding: 4px 10px; border-radius: 4px; color: #fff;
+    backdrop-filter: blur(4px);
+  }
+  .blog-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .blog-date {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); font-weight: 600; margin-bottom: 10px;
+  }
+  .blog-card-title {
+    font-family: var(--serif); font-size: 1.2rem; line-height: 1.3;
+    letter-spacing: -.01em; margin-bottom: 10px;
+  }
+  .blog-excerpt {
+    font-size: .9rem; color: var(--muted); line-height: 1.65;
+    flex: 1;
+  }
+  .blog-read {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: .82rem; font-weight: 600; color: var(--accent);
+    margin-top: 16px; letter-spacing: .02em;
+  }
+  .blog-read svg { width: 14px; height: 14px; transition: transform .25s; }
+  .blog-card:hover .blog-read svg { transform: translateX(4px); }
+
+  /* ── BLOG POST FULL ── */
+  .blog-post-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(26,26,24,.5);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+    animation: fadeIn .3s ease;
+  }
+  .blog-post-overlay.active { display: block; }
+  .blog-post-container {
+    max-width: 740px; margin: 60px auto; padding: 0 24px 80px;
+    animation: fadeUp .4s ease both;
+  }
+  .blog-post-close {
+    position: sticky; top: 20px; float: right;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--card); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.2rem; color: var(--muted);
+    z-index: 10; transition: background .2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .blog-post-close:hover { background: var(--highlight); }
+  .blog-post-card {
+    background: var(--card); border-radius: 20px; overflow: hidden;
+    box-shadow: 0 24px 64px rgba(26,26,24,.12);
+  }
+  .blog-post-hero {
+    height: 260px; display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; color: #fff; position: relative;
+  }
+  .blog-post-hero .img-caption {
+    position: absolute; bottom: 12px; right: 16px;
+    font-size: .65rem; color: rgba(255,255,255,.7); font-style: italic;
+  }
+  .blog-post-content { padding: 48px 48px 56px; }
+  .blog-post-content .blog-date { margin-bottom: 8px; }
+  .blog-post-content h2 {
+    font-family: var(--serif); font-size: 1.85rem; line-height: 1.25;
+    letter-spacing: -.02em; margin-bottom: 24px;
+  }
+  .blog-post-content h3 {
+    font-family: var(--serif); font-size: 1.2rem; line-height: 1.35;
+    margin-top: 32px; margin-bottom: 12px; color: var(--accent);
+  }
+  .blog-post-content p {
+    font-size: .97rem; color: #44403C; line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .blog-post-content ul {
+    margin: 0 0 18px 20px;
+    font-size: .97rem; color: #44403C; line-height: 1.8;
+  }
+  .blog-post-content li {
+    margin-bottom: 6px;
+  }
+  .blog-post-content a {
+    color: var(--accent); text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .blog-post-content a:hover { color: var(--accent-light); }
+  .blog-post-content .word-count {
+    font-size: .75rem; color: var(--muted); font-style: italic;
+    margin-top: 28px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .blog-post-content .key-takeaway {
+    background: var(--highlight);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 18px;
+    font-size: .95rem;
+    color: #44403C;
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--fg); color: #fff; text-align: center;
+  }
+  #contact .section-label { color: var(--accent-light); }
+  #contact .section-title { color: #fff; }
+  #contact .section-desc { color: #A8A29E; margin: 0 auto 36px; }
+  .contact-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px; color: #fff; text-decoration: none;
+    font-size: .88rem; font-weight: 500;
+    transition: background .25s, border-color .25s;
+  }
+  .contact-link:hover {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.3);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--fg); color: var(--muted);
+    text-align: center; padding: 24px 32px;
+    font-size: .78rem; border-top: 1px solid rgba(255,255,255,.06);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: .75rem; }
+    .blog-post-content { padding: 28px 24px 36px; }
+    section { padding: 72px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Hanqi Chen</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<!-- REVISION NOTES:
+     - Shortened the hero subtitle using Nodder's 50% reduction principle
+     - Front-loaded the key value proposition (what I do for you)
+     - Removed redundant descriptors ("real-world business acumen")
+     - Made the CTA link text more descriptive than just "Read My Blog"
+-->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Entrepreneur · Global Thinker · Team Player</span>
+    <h1>Hey, I'm Hanqi. I bridge <em>cultures and commerce</em> to help businesses grow.</h1>
+    <p class="hero-sub">I help businesses expand across borders — combining cross-cultural fluency, franchise strategy, and hands-on logistics experience from China, Chile, Switzerland, and the U.S.</p>
+    <a href="#blog" class="hero-cta">
+      Explore my writing on global business
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<!-- REVISION NOTES:
+     - Broke long paragraph into shorter, single-concept paragraphs (Nodder Ch.1)
+     - Front-loaded key facts: what I study, where I've been (inverted pyramid)
+     - Replaced vague phrases with specific, verifiable facts (Nodder Ch.5)
+     - Reduced reading level by using shorter sentences (Nodder Ch.2)
+-->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">International business experience across four countries and two languages.</h2>
+      <p class="section-desc" style="margin-bottom:18px;">
+        I'm a senior at Penn State studying Business with an Entrepreneurship focus. I speak fluent Mandarin and English.
+      </p>
+      <p class="section-desc" style="margin-bottom:18px;">
+        I've lived and worked in China, Switzerland, and the U.S. During an internship in China, I managed cherry imports from Chile — coordinating logistics, suppliers, and buyers across three time zones.
+      </p>
+      <p class="section-desc" style="margin-bottom:18px;">
+        My focus now is franchise growth strategy: helping brands scale into new markets and cultures.
+      </p>
+      <p class="section-desc">
+        As a varsity basketball and volleyball player, I've built habits of discipline, fast recovery, and performing under pressure — skills that translate directly to business.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Countries Lived</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">SKUs Managed</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image" style="background: none; padding: 0;">
+      <img src="data:image/jpeg;base64,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" alt="Hanqi Chen — Penn State senior studying International Business and Entrepreneurship" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+    </div>
+  </div>
+</section>
+
+<!-- ══ BLOG ══ -->
+<!-- REVISION NOTES:
+     - Made blog card headlines more specific and informative (Nodder Ch.3)
+     - Replaced teaser-style excerpts with summaries that state the key point
+     - Changed "Read more" link text to descriptive action text (Nodder Ch.3)
+-->
+<section id="blog">
+  <p class="section-label">Blog</p>
+  <h2 class="section-title">Writing on global business, franchising, and leadership.</h2>
+  <p class="section-desc">What I'm learning about international commerce, franchise strategy, and building a career across cultures.</p>
+
+  <div class="blog-grid">
+
+    <!-- Card 1 -->
+    <div class="blog-card" onclick="openPost('post1')">
+      <div class="blog-thumb t1">🌐
+        <span class="blog-thumb-label">Global Trade</span>
+      </div>
+      <div class="blog-body">
+        <p class="blog-date">March 2026</p>
+        <h3 class="blog-card-title">Cross-Cultural Fluency Matters More Than Language in Global Deals</h3>
+        <p class="blog-excerpt">Speaking two languages isn't enough. Trust-building rituals, negotiation styles, and unspoken rules differ across cultures — and companies that ignore this lose deals.</p>
+        <span class="blog-read">Read about cross-cultural business skills <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="blog-card" onclick="openPost('post2')">
+      <div class="blog-thumb t2">🏪
+        <span class="blog-thumb-label">Franchising</span>
+      </div>
+      <div class="blog-body">
+        <p class="blog-date">March 2026</p>
+        <h3 class="blog-card-title">Global Franchise Expansion Needs Advisors with Cultural Intelligence</h3>
+        <p class="blog-excerpt">U.S. franchises are expanding overseas faster than ever, but the advisor role hasn't caught up. The next generation needs both financial skills and cross-cultural experience.</p>
+        <span class="blog-read">Read about franchise advisory careers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="blog-card" onclick="openPost('post3')">
+      <div class="blog-thumb t3">🏀
+        <span class="blog-thumb-label">Leadership</span>
+      </div>
+      <div class="blog-body">
+        <p class="blog-date">March 2026</p>
+        <h3 class="blog-card-title">3 Lessons from Varsity Sports That Apply Directly to Entrepreneurship</h3>
+        <p class="blog-excerpt">Discipline as a system, fast recovery from mistakes, and comfort with constant travel — three habits from the court that shape how I approach business.</p>
+        <span class="blog-read">Read about athletics and business skills <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<!-- REVISION NOTES:
+     - Made link text descriptive instead of just "LinkedIn" (Nodder Ch.3)
+     - Shortened the description — one clear sentence
+-->
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2 class="section-title">Let's connect.</h2>
+  <p class="section-desc">I'm always open to conversations about franchising, international trade, or career advice.</p>
+  <div class="contact-links">
+    <a href="/cdn-cgi/l/email-protection#2c444d425d456c49544d415c4049024f4341" class="contact-link">✉️ Email me directly</a>
+    <a href="https://www.linkedin.com" target="_blank" class="contact-link">🔗 Connect on LinkedIn</a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  &copy; 2026 Hanqi Chen. Built for Penn State ENGL 202C — Project 4.
+</footer>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- ══ BLOG POST OVERLAYS ══ -->
+<!-- ══════════════════════════════════════════════════ -->
+
+<!-- POST 1 -->
+<!-- REVISION NOTES:
+     - Applied inverted pyramid: key argument first, then supporting detail (Nodder Ch.4)
+     - Added a key-takeaway summary box at the top so scanners get the main point
+     - Shorter paragraphs, one concept each (Nodder Ch.1)
+     - Made the HBR link text describe destination content, not "click here" (Nodder Ch.3)
+     - Reduced wordiness throughout (Nodder's 50% principle)
+     - Used active voice and "you" address (Nodder Ch.2)
+-->
+<div class="blog-post-overlay" id="post1">
+  <div class="blog-post-container">
+    <div class="blog-post-close" onclick="closePost('post1')">✕</div>
+    <div class="blog-post-card">
+      <div class="blog-post-hero" style="background:linear-gradient(135deg,#1E3A5F,#3B82F6);">🌐
+        <span class="img-caption">Image: Global supply chain networks — Unsplash</span>
+      </div>
+      <div class="blog-post-content">
+        <p class="blog-date">March 2026 · 4 min read</p>
+        <h2>Cross-Cultural Fluency Matters More Than Language in Global Deals</h2>
+
+        <div class="key-takeaway">
+          <strong>Key point:</strong> Speaking a second language gets you in the room. But closing deals across cultures requires understanding unspoken rules about trust, timing, and negotiation — skills most companies still undervalue.
+        </div>
+
+        <h3>Language Is the Entry Ticket, Not the Whole Game</h3>
+        <p>People assume my fluency in Mandarin and English makes global business easy. It doesn't. The real challenge is the unspoken rules: how cultures build trust, pace negotiations, and define professional relationships.</p>
+
+        <p>I learned this during my internship coordinating Chilean cherry imports into China. On paper, it was logistics. In practice, it was an exercise in bridging two business cultures across three time zones.</p>
+
+        <h3>Where Companies Get This Wrong</h3>
+        <p>Western suppliers often wanted to jump straight to pricing. Chinese buyers expected a longer trust-building phase first. No amount of translation could bridge that gap — it required cultural empathy and patience.</p>
+
+        <p>This pattern shows up repeatedly. A <a href="https://hbr.org/2024/01/one-reason-cross-cultural-small-talk-is-so-tricky" target="_blank">Harvard Business Review study on cross-cultural small talk</a> found that professionals default to their own cultural norms instead of adapting — even in high-stakes deals.</p>
+
+        <h3>Why This Skill Is Growing in Demand</h3>
+        <p>Global supply chains are getting more complex. Franchise brands are entering new markets. Both trends increase the need for people who can operate across cultural lines.</p>
+
+        <p>My time at Leysin American School in Switzerland, studying alongside peers from over 50 countries, built this skill in a way no textbook could.</p>
+
+        <p><strong>My advice to business students:</strong> invest as much in cross-cultural fluency as you do in financial modeling. The spreadsheet won't close the deal — but understanding the person across the table might.</p>
+
+        <p class="word-count">~270 words</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POST 2 -->
+<!-- REVISION NOTES:
+     - Inverted pyramid: lead with the talent gap problem and opportunity (Nodder Ch.4)
+     - Key takeaway box summarizes the post for scanners
+     - Broke up long compound paragraphs into single-concept chunks (Nodder Ch.1)
+     - Replaced vague hype ("real impact on small business owners' lives") with specifics (Nodder Ch.5)
+     - Made link text describe the destination content (Nodder Ch.3)
+-->
+<div class="blog-post-overlay" id="post2">
+  <div class="blog-post-container">
+    <div class="blog-post-close" onclick="closePost('post2')">✕</div>
+    <div class="blog-post-card">
+      <div class="blog-post-hero" style="background:linear-gradient(135deg,#7C2D12,#F59E0B);">🏪
+        <span class="img-caption">Image: Franchise storefront operations — Unsplash</span>
+      </div>
+      <div class="blog-post-content">
+        <p class="blog-date">March 2026 · 4 min read</p>
+        <h2>Global Franchise Expansion Needs Advisors with Cultural Intelligence</h2>
+
+        <div class="key-takeaway">
+          <strong>Key point:</strong> U.S. franchise brands are expanding overseas at record pace, but most franchise advisors were trained for a domestic market. The industry needs people who combine financial analysis with cross-cultural skills.
+        </div>
+
+        <h3>A Growing Talent Gap</h3>
+        <p>Franchising is no longer just an American story. The <a href="https://www.franchise.org/research/economic-outlook" target="_blank">International Franchise Association's 2024 Economic Outlook</a> shows U.S. brands expanding into Asia, the Middle East, and Latin America at record speed.</p>
+
+        <p>This creates a problem. The traditional franchise advisor visits stores, reviews P&L statements, and suggests improvements. That works domestically. But a Signarama in New Jersey serves a very different market than one in Dubai or São Paulo.</p>
+
+        <h3>What the New Advisor Needs</h3>
+        <p>Future franchise advisors need two sets of skills:</p>
+        <ul>
+          <li><strong>Financial analysis</strong> — reading P&L statements, spotting margin gaps, and benchmarking across locations</li>
+          <li><strong>Cultural intelligence</strong> — understanding why a marketing campaign that works in Florida may fail in Shanghai</li>
+        </ul>
+
+        <p>My own experience in cross-border logistics taught me that the same process can run smoothly in one market and need major changes in another. Different regulations, suppliers, and customer expectations all play a role.</p>
+
+        <h3>A Career Worth Watching</h3>
+        <p>For business students who speak multiple languages and have lived in different cultures, franchise advisory is an emerging path that combines strategy, travel, and hands-on work with business owners.</p>
+
+        <p>The industry is just starting to realize how much it needs people who can bridge these worlds. That's the kind of work I'm building toward.</p>
+
+        <p class="word-count">~260 words</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POST 3 -->
+<!-- REVISION NOTES:
+     - Added key takeaway summary for scanners (Nodder Ch.3/Ch.4)
+     - Shortened the intro — removed "polite nod" anecdote that delayed the point
+     - Tightened each lesson section to one focused paragraph (Nodder Ch.1)
+     - Made Forbes link text describe what readers will find (Nodder Ch.3)
+     - Removed cliché acknowledgment ("teamwork makes the dream work") — Nodder Ch.5 on removing fluff
+-->
+<div class="blog-post-overlay" id="post3">
+  <div class="blog-post-container">
+    <div class="blog-post-close" onclick="closePost('post3')">✕</div>
+    <div class="blog-post-card">
+      <div class="blog-post-hero" style="background:linear-gradient(135deg,#065F46,#10B981);">🏀
+        <span class="img-caption">Image: Basketball court teamwork — Unsplash</span>
+      </div>
+      <div class="blog-post-content">
+        <p class="blog-date">March 2026 · 4 min read</p>
+        <h2>3 Lessons from Varsity Sports That Apply Directly to Entrepreneurship</h2>
+
+        <div class="key-takeaway">
+          <strong>Key point:</strong> Playing varsity basketball and volleyball built three specific habits I now use in business every day: treating discipline as a system, recovering fast from mistakes, and staying comfortable in unfamiliar environments.
+        </div>
+
+        <h3>Lesson 1: Discipline Is a System, Not a Feeling</h3>
+        <p>Motivation fades. What got me to 6 a.m. practice was a system of habits built over years. A <a href="https://www.forbes.com/sites/forbesbusinesscouncil/2024/03/08/discipline-in-leadership-what-ive-learned/" target="_blank">Forbes article on discipline in leadership</a> makes the same case for founders: the most successful ones build routines that make good decisions automatic. That's exactly how athletes train.</p>
+
+        <h3>Lesson 2: Recover Fast or Lose</h3>
+        <p>In volleyball, a bad set happens. What matters is how fast the team resets. Dwelling on mistakes leads to losing streaks. I carry this into business — when something goes wrong, I focus on the next action, not the last error. Markets shift, plans fail, and clients change direction. The question is always: how fast can you adapt?</p>
+
+        <h3>Lesson 3: Travel Builds Perspective</h3>
+        <p>Varsity athletics meant constant travel — different cities, gyms, and crowds every week. That rhythm of adapting to new settings and performing under unfamiliar conditions mirrors a career in franchise consulting or international business. A job posting with a 50% travel requirement doesn't scare me. I know from experience that real growth happens away from home.</p>
+
+        <p>The court and the marketplace reward the same things: preparation, resilience, and performing under pressure. If you're a student-athlete exploring business, don't underestimate what the game has already taught you.</p>
+
+        <p class="word-count">~270 words</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function openPost(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePost(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  // Close on escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.blog-post-overlay.active').forEach(el => {
+        el.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+  // Close on overlay background click
+  document.querySelectorAll('.blog-post-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target ===
